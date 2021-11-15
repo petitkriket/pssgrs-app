@@ -1,9 +1,10 @@
 <template>
   <div class="container">
     <CThemeProvider>
-      <CColorModeProvider>
-        <CBox font-family="body" as="main">
+      <CColorModeProvider v-slot="{ colorMode }">
+        <CBox font-family="body" as="main" v-bind="mainStyles[colorMode]">
           <CReset />
+          <NavBar />
           <Nuxt />
         </CBox>
       </CColorModeProvider>
@@ -11,20 +12,22 @@
   </div>
 </template>
 <script>
-import {
-  CThemeProvider,
-  CColorModeProvider,
-  CReset,
-  CBox
-} from '@chakra-ui/vue'
 
 export default {
-  name: 'App',
-  components: {
-    CThemeProvider,
-    CColorModeProvider,
-    CReset,
-    CBox
-  }
+  name: 'DefaultLayout',
+  data() {
+    return {
+      mainStyles: {
+        dark: {
+          bg: 'gray.700',
+          color: 'whiteAlpha.900'
+        },
+        light: {
+          bg: 'white',
+          color: 'gray.900'
+        }
+      }
+    }
+  },
 }
 </script>
